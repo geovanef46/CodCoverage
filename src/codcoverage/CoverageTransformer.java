@@ -18,6 +18,11 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.MethodInvocation;
+import org.eclipse.jdt.core.dom.QualifiedName;
+import org.eclipse.jdt.core.dom.StringLiteral;
+
+import sun.security.jca.GetInstance;
 
 /**
  * Deve receber o source e reescrever em target
@@ -45,7 +50,7 @@ public String insertFile() {
  
  public boolean insertLog() { 
      
-     Logger log = logIn("loggin");
+     Logger log = logIn();
      ASTParser parser = ASTParser.newParser(AST.JLS8);
      parser.setSource(insertFile().toCharArray());
      parser.setKind(ASTParser.K_COMPILATION_UNIT);
@@ -55,11 +60,21 @@ public String insertFile() {
 
  List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit);
  for (MethodDeclaration methodDeclaration : methodDeclarations) {
-     log.log(Level.INFO, methodDeclaration.getName().getFullyQualifiedName());
-//     MethodInvocation methodInvocation = ast.newMethodInvocation();
+     MethodInvocation methodInvocation = ast.newMethodInvocation();
+     
+     methodInvocation.setName(ast.newSimpleName("logIn"));
+     
+     methodInvocation.setName(ast.newSimpleName("log"));
+     
+     StringLiteral literal = ast.newStringLiteral();
+     literal.setLiteralValue("Level.INFO,\"passou no\"");
+     methodInvocation.arguments().add(literal);
+     
+     System.out.println(methodDeclaration.getName().getFullyQualifiedName());
+//     
 //
 //     // System.out.println("Hello, World")
-//     QualifiedName qName = ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+//     
 //     methodInvocation.setExpression(qName);
 //     methodInvocation.setName(ast.newSimpleName("println"));
 //
@@ -74,12 +89,12 @@ public String insertFile() {
  }
  
  
- public Logger logIn(String name) {
+ public Logger logIn() {
      
      Logger log = Logger.getLogger("Log");
      FileHandler filetxt = null;
      try {
-         filetxt = new FileHandler(name+".txt");
+         filetxt = new FileHandler("loggin.txt");
          filetxt.setFormatter(new SimpleFormatter());
      } catch (SecurityException | IOException e1) {
        
