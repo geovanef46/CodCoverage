@@ -7,13 +7,16 @@ package codcoverage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -22,7 +25,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.StringLiteral;
 
-import sun.security.jca.GetInstance;
+
 
 /**
  * Deve receber o source e reescrever em target
@@ -49,10 +52,13 @@ public String insertFile() {
 
  
  public boolean insertLog() { 
+     Map options = JavaCore.getOptions();
+     JavaCore.setComplianceOptions(JavaCore.VERSION_1_5, options);
      
      Logger log = logIn();
      ASTParser parser = ASTParser.newParser(AST.JLS8);
      parser.setSource(insertFile().toCharArray());
+     parser.setCompilerOptions(options);
      parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
 
  CompilationUnit unit = (CompilationUnit) parser.createAST(null);
@@ -96,7 +102,7 @@ public String insertFile() {
      try {
          filetxt = new FileHandler("loggin.txt");
          filetxt.setFormatter(new SimpleFormatter());
-     } catch (SecurityException | IOException e1) {
+     } catch (Exception e1) {
        
          e1.printStackTrace();
      }
@@ -105,6 +111,14 @@ public String insertFile() {
      return log;
     
 }
+ 
+ 
+ 
+ 
+ public boolean directoryNav() {
+     
+     return true;
+ }
  
  
  public static void main(String[] args) {
@@ -116,12 +130,6 @@ public String insertFile() {
 
 
 
-    
- 
-    
-    public boolean directoryNav() {
-        
-        return true;
-    }
+
     
 }
