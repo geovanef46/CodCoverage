@@ -1,4 +1,4 @@
-package codcoverage.target.test.example;
+package codcoverage.source.src.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 

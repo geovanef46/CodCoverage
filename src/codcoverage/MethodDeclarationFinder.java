@@ -12,6 +12,10 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
     public class MethodDeclarationFinder extends ASTVisitor {
         private final List <MethodDeclaration> methods = new ArrayList<>();
 
+        /**Percorre a AST retornando os métodos encontrados 
+         * @param node
+         * @return
+         */
         public static List<MethodDeclaration> perform(ASTNode node) {
             MethodDeclarationFinder finder = new MethodDeclarationFinder();
             node.accept(finder);
@@ -24,9 +28,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
           return super.visit(method);
         }
 
-        /**
-         * @return an immutable list view of the methods discovered by this visitor
-         */
+     
         public List <MethodDeclaration> getMethods() {
           return Collections.unmodifiableList(methods);
         }

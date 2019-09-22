@@ -26,16 +26,24 @@ import org.eclipse.jdt.core.dom.StringLiteral;
 
 
 /**
- * Deve receber o source e reescrever em target
- * @author
+ * Deve receber o source e reescrever em target 
+ * 
+ * OBS: O método deve buscar na suite de testes as linhas específicas a serem buscadas,
+ * até o momento tenta inserir um log em cada método, mas por conta do erro na biblioteca 
+ * não foi prosseguido para buscar os pontos especificos;
+ * 
+ * @author jason
  * 
  **/
 public class CoverageTransformer {
     String path = "src/codcoverage/source/src/example/Triangle.java";
-    String activityPath; 
     
 
 
+/** realiza a leitura de um arquivo 
+ *
+ * @return String do arquivo
+ */
 public String insertFile() {
         String source="";
         try {
@@ -49,21 +57,25 @@ public String insertFile() {
  }
 
  
- public boolean insertLog() throws SecurityException{ 
-     Map options = JavaCore.getOptions();
-     JavaCore.setComplianceOptions(JavaCore.VERSION_1_5, options);
+ /**
+  * Inserir um trecho de código para log nos métodos especificos 
+  * tratados pelo teste. 
+ * @return 
+ * @throws SecurityException tentativa de tratar o erro de assinatura das bibliotecas, contornando o erro.
+ */
+public boolean insertLog() throws SecurityException{ 
      
-     Logger log = logIn();
-     ASTParser parser = ASTParser.newParser(AST.JLS8);
-     parser.setSource(insertFile().toCharArray());
-     parser.setCompilerOptions(options);
-     parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
+     Logger log = logIn(); //criando arquivo de log
+     ASTParser parser = ASTParser.newParser(AST.JLS8); 
+     parser.setSource(insertFile().toCharArray()); //adicionar o source ao parser
+     parser.setCompilerOptions(JavaCore.getOptions()); 
+     parser.setKind(ASTParser.K_COMPILATION_UNIT); 
 
- CompilationUnit unit = (CompilationUnit) parser.createAST(null);
- AST ast = unit.getAST();
+ CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
+ AST ast = unit.getAST(); 
 
- List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit);
- for (MethodDeclaration methodDeclaration : methodDeclarations) {
+ List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit); 
+ for (MethodDeclaration methodDeclaration : methodDeclarations) { // inserir declarações de log dentro dos métodos
      MethodInvocation methodInvocation = ast.newMethodInvocation();
      
      methodInvocation.setName(ast.newSimpleName("logIn"));
@@ -75,19 +87,7 @@ public String insertFile() {
      methodInvocation.arguments().add(literal);
      
      System.out.println(methodDeclaration.getName().getFullyQualifiedName());
-//     
-//
-//     // System.out.println("Hello, World")
-//     
-//     methodInvocation.setExpression(qName);
-//     methodInvocation.setName(ast.newSimpleName("println"));
-//
-//     StringLiteral literal = ast.newStringLiteral();
-//     literal.setLiteralValue("Hello, World");
-//     methodInvocation.arguments().add(literal);
-//
-//     // Append the statement
-//     methodDeclaration.getBody().statements().add(ast.newExpressionStatement(methodInvocation));
+
  }
  return true;
  }
@@ -124,12 +124,15 @@ public String insertFile() {
  public static void main(String[] args) {
      
      CoverageTransformer cc = new CoverageTransformer();
-     try {
          cc.insertLog();
-    } catch (SecurityException e) {
-       System.out.println("Erro de assinatura da biblioteca..."+ e.getMessage());
-    }
+    
      
+//     CoverageTransformer cc = new CoverageTransformer();
+//     try {
+//         cc.insertLog();
+//    } catch (SecurityException e) {
+//       System.out.println("Erro de assinatura da biblioteca..."+ e.getMessage());
+//    }
      
  }
 
