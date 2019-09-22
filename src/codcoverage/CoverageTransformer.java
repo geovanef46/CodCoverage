@@ -53,38 +53,38 @@ public String insertFile() {
      Logger log = logIn();
      ASTParser parser = ASTParser.newParser(AST.JLS8);
      parser.setSource(insertFile().toCharArray());
-     parser.setKind(ASTParser.K_COMPILATION_UNIT);
+     parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
 
  CompilationUnit unit = (CompilationUnit) parser.createAST(null);
  AST ast = unit.getAST();
-
- List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit);
- for (MethodDeclaration methodDeclaration : methodDeclarations) {
-     MethodInvocation methodInvocation = ast.newMethodInvocation();
-     
-     methodInvocation.setName(ast.newSimpleName("logIn"));
-     
-     methodInvocation.setName(ast.newSimpleName("log"));
-     
-     StringLiteral literal = ast.newStringLiteral();
-     literal.setLiteralValue("Level.INFO,\"passou no\"");
-     methodInvocation.arguments().add(literal);
-     
-     System.out.println(methodDeclaration.getName().getFullyQualifiedName());
-//     
 //
-//     // System.out.println("Hello, World")
+// List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit);
+// for (MethodDeclaration methodDeclaration : methodDeclarations) {
+//     MethodInvocation methodInvocation = ast.newMethodInvocation();
 //     
-//     methodInvocation.setExpression(qName);
-//     methodInvocation.setName(ast.newSimpleName("println"));
-//
+//     methodInvocation.setName(ast.newSimpleName("logIn"));
+//     
+//     methodInvocation.setName(ast.newSimpleName("log"));
+//     
 //     StringLiteral literal = ast.newStringLiteral();
-//     literal.setLiteralValue("Hello, World");
+//     literal.setLiteralValue("Level.INFO,\"passou no\""+methodDeclaration.getName().getFullyQualifiedName());
 //     methodInvocation.arguments().add(literal);
-//
-//     // Append the statement
-//     methodDeclaration.getBody().statements().add(ast.newExpressionStatement(methodInvocation));
- }
+//     
+//     System.out.println(methodDeclaration.getName().getFullyQualifiedName());
+////     
+////
+////     // System.out.println("Hello, World")
+////     
+////     methodInvocation.setExpression(qName);
+////     methodInvocation.setName(ast.newSimpleName("println"));
+////
+////     StringLiteral literal = ast.newStringLiteral();
+////     literal.setLiteralValue("Hello, World");
+////     methodInvocation.arguments().add(literal);
+////
+////     // Append the statement
+////     methodDeclaration.getBody().statements().add(ast.newExpressionStatement(methodInvocation));
+// }
  return true;
  }
  
