@@ -7,11 +7,10 @@ package codcoverage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -22,7 +21,6 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
-import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.StringLiteral;
 
 
@@ -51,7 +49,7 @@ public String insertFile() {
  }
 
  
- public boolean insertLog() { 
+ public boolean insertLog() throws SecurityException{ 
      Map options = JavaCore.getOptions();
      JavaCore.setComplianceOptions(JavaCore.VERSION_1_5, options);
      
@@ -99,13 +97,15 @@ public String insertFile() {
      
      Logger log = Logger.getLogger("Log");
      FileHandler filetxt = null;
-     try {
-         filetxt = new FileHandler("loggin.txt");
+
+         try {
+            filetxt = new FileHandler("loggin.txt");
+        } catch (SecurityException | IOException e) {
+            // TODO Auto-generated catch block
+           
+        }
          filetxt.setFormatter(new SimpleFormatter());
-     } catch (Exception e1) {
-       
-         e1.printStackTrace();
-     }
+
      log.addHandler(filetxt);
      
      return log;
@@ -124,7 +124,12 @@ public String insertFile() {
  public static void main(String[] args) {
      
      CoverageTransformer cc = new CoverageTransformer();
-     cc.insertLog();
+     try {
+         cc.insertLog();
+    } catch (SecurityException e) {
+       System.out.println("Erro de assinatura da biblioteca..."+ e.getMessage());
+    }
+     
      
  }
 
