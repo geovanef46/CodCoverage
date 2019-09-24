@@ -77,8 +77,8 @@ public boolean insertLog() throws SecurityException{
  List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit); 
  for (MethodDeclaration methodDeclaration : methodDeclarations) { // inserir declarações de log dentro dos métodos
      MethodInvocation methodInvocation = ast.newMethodInvocation();
-     
-     methodInvocation.set(ast.newSimpleName("logIn"));
+    
+     methodInvocation.setName(ast.newSimpleName("logIn"));
     
      methodInvocation.setName(ast.newSimpleName("log"));
      
