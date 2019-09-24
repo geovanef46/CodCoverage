@@ -78,8 +78,8 @@ public boolean insertLog() throws SecurityException{
  for (MethodDeclaration methodDeclaration : methodDeclarations) { // inserir declarações de log dentro dos métodos
      MethodInvocation methodInvocation = ast.newMethodInvocation();
      
-     methodInvocation.setName(ast.newSimpleName("logIn"));
-     
+     methodInvocation.set(ast.newSimpleName("logIn"));
+    
      methodInvocation.setName(ast.newSimpleName("log"));
      
      StringLiteral literal = ast.newStringLiteral();
@@ -100,7 +100,7 @@ public boolean insertLog() throws SecurityException{
 
          try {
             filetxt = new FileHandler("loggin.txt");
-        } catch (SecurityException | IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
            
         }
