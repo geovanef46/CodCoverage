@@ -1,5 +1,6 @@
 package codcoverage.source.src.test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +12,7 @@ import codcoverage.source.src.example.TriangleKind;
 
 public class TriangleTest { 
 	 
-    @Test 
+    @Test
     public void equilateralTriangleHaveEqualSides() throws Exception { 
         Triangle triangle = new Triangle(2, 2, 2); 
  

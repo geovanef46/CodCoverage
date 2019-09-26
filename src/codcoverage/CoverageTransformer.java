@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
+import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.StringLiteral;
 
 
@@ -40,8 +41,9 @@ import org.eclipse.jdt.core.dom.StringLiteral;
  * 
  **/
 public class CoverageTransformer {
-    String pathSource = "src/codcoverage/source/src/example";
-    String pathTarget = "src/codcoverage/target";
+    String pathSource = "src/codcoverage/source/src/example/";
+    File pathTarget;
+    File pathsource;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
     private static CoverageTransformer instance;
     
@@ -72,6 +74,18 @@ public String insertFile(String path) throws NullPointerException {
  }
 
 
+public void saveFile(String path, String name) {
+	pathTarget = new File("src/codcoverage/target/"+name+".java");
+	pathsource = new File(path);
+    try {
+      FileUtils.copyFile(path, pathTarget);
+    } catch (IOException e) {
+      
+    }
+     
+}
+
+
 public boolean analise() {
     insertLog(testSuite, null);
     return true;
@@ -80,18 +94,17 @@ public boolean analise() {
 
 public boolean analise(String name) {
     String source=pathSource;
-    String[] extensions = {"*.java"};
+    String[] extensions = {"java"};
     File directory = new File(source);
+
+   
     Collection<File> files = FileUtils.listFiles(directory,extensions, false);
-    try {
-        while(!files.isEmpty()) {
-            source = FileUtils.readFileToString(new File(source), "UTF-8");
+        for(File file : files) {
+            source = file.toString();
+            System.out.println("Obtido: "+file.getName());
             insertLog(source,name);
         }
-    
-    } catch (Exception e) {
-  System.out.println("erro ao buscar arquivo...");
-    }
+ 
 
     return true;
 }
@@ -120,23 +133,39 @@ public boolean insertLog(String source, String name) throws SecurityException{
         if(name == methodDeclaration.getName().getIdentifier()) {
             MethodInvocation methodInvocation = ast.newMethodInvocation();
             
-//          log.log(Level.INFO,"#"+new org.eclipse.jface.text.Document(this.insertFile()).getNumberOfLines());
-          
-          methodInvocation.setExpression(ast.newSimpleName("logIn"));c 
-         
-          methodInvocation.setName(ast.newSimpleName("log"));
-          
-          StringLiteral literal = ast.newStringLiteral();
-          literal.setLiteralValue("Level.INFO,\"OK\"");
-          methodInvocation.arguments().add(literal);
+          //log.log(Level.INFO,"#"+new org.eclipse.jface.text.Document(this.insertFile()).getNumberOfLines());
+//          
+//          methodInvocation.setExpression(ast.newSimpleName("logIn")); 
+//         
+//          methodInvocation.setName(ast.newSimpleName("log"));
+//          
+//          StringLiteral literal = ast.newStringLiteral();
+//          literal.setLiteralValue("Level.INFO,\"OK\"");
+//          methodInvocation.arguments().add(literal);
            
+
+            QualifiedName qName =
+                ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+
+            methodInvocation.setExpression(qName);
+            methodInvocation.setName(ast.newSimpleName("println"));
+
+            StringLiteral literalStart = ast.newStringLiteral();
+            literalStart.setLiteralValue("Executando do metodo: " + name);
+
+            methodInvocation.arguments().add(literalStart);
+
+
+            // Append the statement
+            methodDeclaration.getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
+            
         }
-    }
+    }else{
      
      analise(methodDeclaration.getName().getIdentifier());
 
      System.out.println(methodDeclaration.getName().getFullyQualifiedName());
-
+    }
  }
  return true;
  }
