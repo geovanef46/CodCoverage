@@ -1,25 +1,42 @@
 package codcoverage.source.src.example;
 
+
 import java.util.HashSet;
-import java.util.Set; 
+import java.util.Set;
+
+//--------------------
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import codcoverage.CoverageTransformer;
+
+//--------------------
  
 public class Triangle { 
- 
+   
+//--------------------    
+    Logger log = CoverageTransformer.getInstance().logIn();
+//--------------------
     private double side1; 
     private double side2; 
     private double side3; 
  
     public Triangle(double side1, double side2, double side3) throws TriangleException { 
+        //--------------------
+        log.log(Level.INFO,"logou aqui");
+      //--------------------
         this.side1 = side1; 
         this.side2 = side2; 
         this.side3 = side3; 
  
         if (allSidesAreZero() || hasImpossibleSides() || violatesTriangleInequality()) { 
             throw new TriangleException(); 
-        } 
+        }
+
     } 
  
     public TriangleKind getKind() { 
+
         int uniqueSides = getNumberOfUniqueSides(); 
  
         if (uniqueSides == 1) { 
@@ -31,6 +48,7 @@ public class Triangle {
         } 
  
         return TriangleKind.SCALENE; 
+        
     } 
  
     private boolean allSidesAreZero() { 
