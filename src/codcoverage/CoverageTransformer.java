@@ -6,13 +6,10 @@
 package codcoverage;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -45,6 +42,8 @@ public class CoverageTransformer {
     File pathTarget;
     File pathsource;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
+    Logger log = null;
+    FileHandler filetxt = null;
     private static CoverageTransformer instance;
     
     private CoverageTransformer() {
@@ -74,19 +73,30 @@ public String insertFile(String path) throws NullPointerException {
  }
 
 
-public void saveFile(String path, String name) {
+public void copyFile(String path, String name) {
 	pathTarget = new File("src/codcoverage/target/"+name+".java");
 	pathsource = new File(path);
     try {
-      FileUtils.copyFile(path, pathTarget);
+      FileUtils.copyFile(pathsource, pathTarget);
     } catch (IOException e) {
       
     }
      
 }
 
+public void saveFile(File path,CharSequence data) {
+    try {
+        FileUtils.write(path, data, "UTF-8");
+        System.out.println("arquivo salvo em "+path.getPath());
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
 
 public boolean analise() {
+    
     insertLog(testSuite, null);
     return true;
 }
@@ -101,8 +111,11 @@ public boolean analise(String name) {
     Collection<File> files = FileUtils.listFiles(directory,extensions, false);
         for(File file : files) {
             source = file.toString();
-            System.out.println("Obtido: "+file.getName());
-            insertLog(source,name);
+            pathsource = new File(source);
+            copyFile(this.pathsource.toString(), pathsource.getName());
+            System.out.println("Obtido: "+pathsource.getName());
+            
+            insertLog(pathsource.toString(),name);
         }
  
 
@@ -154,11 +167,12 @@ public boolean insertLog(String source, String name) throws SecurityException{
             literalStart.setLiteralValue("Executando do metodo: " + name);
 
             methodInvocation.arguments().add(literalStart);
+            
 
 
             // Append the statement
             methodDeclaration.getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
-            
+           saveFile(pathsource,unit.toString());
         }
     }else{
      
@@ -173,11 +187,13 @@ public boolean insertLog(String source, String name) throws SecurityException{
  
  public Logger logIn() {
      
-     Logger log = Logger.getLogger("Log");
-     FileHandler filetxt = null;
+         log = Logger.getLogger("Log");
 
          try {
-            filetxt = new FileHandler("loggin.txt");
+             if(filetxt == null) {
+                 filetxt = new FileHandler("loggin.txt");
+             }
+             
         } catch (IOException e) {
             // TODO Auto-generated catch block
            
