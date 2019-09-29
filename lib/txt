@@ -13,3 +13,7 @@
 //        //--------------------
 //        log.log(Level.INFO,"logou aqui");
 //      //--------------------
+
+                 if(node.getNodeType() == node.NAME_QUALIFIED_TYPE) {
+                    //inserir uma propriedade pra comparar do tipo    
+//                     }

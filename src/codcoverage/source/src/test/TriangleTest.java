@@ -13,7 +13,7 @@ import codcoverage.source.src.example.TriangleKind;
 public class TriangleTest { 
 	 
     @Test
-    public void equilateralTriangleHaveEqualSides() throws Exception { 
+    public void equilateralTriangTriangleKindleHaveEqualSides() throws Exception { 
         Triangle triangle = new Triangle(2, 2, 2); 
  
         assertEquals(TriangleKind.EQUILATERAL, triangle.getKind()); 

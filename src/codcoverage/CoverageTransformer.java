@@ -5,6 +5,8 @@
  */
 package codcoverage;
 
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -13,17 +15,25 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import javax.swing.text.Document;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.QualifiedName;
+import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.StringLiteral;
+import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
+import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
+import org.eclipse.text.edits.MalformedTreeException;
+import org.eclipse.text.edits.TextEdit;
 
 
 
@@ -39,8 +49,10 @@ import org.eclipse.jdt.core.dom.StringLiteral;
  **/
 public class CoverageTransformer {
     String pathSource = "src/codcoverage/source/src/example/";
-    File pathTarget;
-    File pathsource;
+    File pathTarget = new File("src/codcoverage/target/");
+    File pathTargetold = pathTarget;
+    File pathCopy;
+    Collection<File> files;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
     Logger log = null;
     FileHandler filetxt = null;
@@ -74,19 +86,21 @@ public String insertFile(String path) throws NullPointerException {
 
 
 public void copyFile(String path, String name) {
-	pathTarget = new File("src/codcoverage/target/"+name+".java");
-	pathsource = new File(path);
+    pathTarget = pathTargetold;
+	pathTarget = new File(pathTarget.getPath()+"/"+name);
+	pathCopy = new File(path);
     try {
-      FileUtils.copyFile(pathsource, pathTarget);
+      FileUtils.copyFile(pathCopy, pathTarget);
+      System.out.println("Arquivo copiado :"+ pathTarget);
     } catch (IOException e) {
       
     }
      
 }
 
-public void saveFile(File path,CharSequence data) {
+public void saveFile(File path,String data) {
     try {
-        FileUtils.write(path, data, "UTF-8");
+        FileUtils.write(path, data);
         System.out.println("arquivo salvo em "+path.getPath());
     } catch (IOException e) {
         // TODO Auto-generated catch block
@@ -97,27 +111,34 @@ public void saveFile(File path,CharSequence data) {
 
 public boolean analise() {
     
-    insertLog(testSuite, null);
+    ElementsSuite(testSuite);
     return true;
 }
 
 
-public boolean analise(String name) {
-    String source=pathSource;
+public boolean analise(ASTNode node) {
+    if(files == null) {
+    String source = "src/codcoverage/source/src/example/";
     String[] extensions = {"java"};
     File directory = new File(source);
-
    
-    Collection<File> files = FileUtils.listFiles(directory,extensions, false);
-        for(File file : files) {
-            source = file.toString();
-            pathsource = new File(source);
-            copyFile(this.pathsource.toString(), pathsource.getName());
-            System.out.println("Obtido: "+pathsource.getName());
-            
-            insertLog(pathsource.toString(),name);
-        }
+    files = FileUtils.listFiles(directory,extensions, false);
+   // pathSource = pathTarget.toString();
+    for(File file : files) {
+        
+        copyFile(file.toString(), file.getName());
  
+     System.out.println("Obtido: "+pathCopy.getName());
+     pathCopy = pathTarget;
+     insertLog(pathCopy.toString(),node);
+ }
+    }else {
+        for(File file : files) {
+            System.out.println("Obtido: "+pathCopy.getName());
+            pathCopy = pathTarget;
+            insertLog(pathCopy.toString(),node);
+        }
+    }
 
     return true;
 }
@@ -127,11 +148,13 @@ public boolean analise(String name) {
   * Inserir um trecho de código para log nos métodos especificos 
   * tratados pelo teste. 
  * @return 
- * @throws SecurityException tentativa de tratar o erro de assinatura das bibliotecas, contornando o erro.
+ * 
  */
-public boolean insertLog(String source, String name) throws SecurityException{ 
+public boolean insertLog(String source, ASTNode node) {
+//     Document document = new Document(source);
      
      Logger log = logIn(); //criando arquivo de log
+     
      ASTParser parser = ASTParser.newParser(AST.JLS8); 
      parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
      parser.setCompilerOptions(JavaCore.getOptions()); 
@@ -140,12 +163,46 @@ public boolean insertLog(String source, String name) throws SecurityException{
  CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
  AST ast = unit.getAST(); 
 
- List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.perform(unit); 
- for (MethodDeclaration methodDeclaration : methodDeclarations) { // inserir declarações de log dentro dos métodos
-     if (name != null) {
-        if(name == methodDeclaration.getName().getIdentifier()) {
-            MethodInvocation methodInvocation = ast.newMethodInvocation();
-            
+// ImportDeclaration id = ast.newImportDeclaration();
+// id.setName(ast.newName("java.util.logging"));
+// ImportDeclaration id2 = ast.newImportDeclaration();
+// id2.setName(ast.newName(new String[] {"codcoverage", "CoverageTransformer"}));
+// 
+// ASTRewrite rewriter = ASTRewrite.create(ast);
+// ListRewrite lrw = rewriter.getListRewrite(unit, CompilationUnit.IMPORTS_PROPERTY);
+// lrw.insertLast(id, null);
+// lrw.insertLast(id2, null);
+// TextEdit edits = rewriter.rewriteAST(document, null);
+// try {
+//    edits.apply(document);
+//} catch (MalformedTreeException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//} catch (BadLocationException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//}
+
+ List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.getMethDeclarations(unit); 
+ for (MethodDeclaration methodDeclaration : methodDeclarations) {
+     
+     if (node != null) {
+         System.out.println(methodDeclaration.getName());
+         //if(((SimpleName)node).toString().equals(methodDeclaration.getName())) {
+            insertLog(ast, unit, methodDeclaration);
+            return true;
+         //}falta implementar o nível de profundidade que deseja comparar metodos ou invocação de metodos ou expressoes/palavras
+
+
+
+//         List<MethodInvocation> methodInvocations = MethodDeclarationFinder.getInvocations(methodDeclaration);
+//         for (MethodInvocation methodInvocation : methodInvocations) {
+//     
+//             if(name == methodInvocation.getName().getIdentifier()) {
+//                 insertLog(ast, unit, methodInvocation);
+//                 return true;
+//
+//              }
           //log.log(Level.INFO,"#"+new org.eclipse.jface.text.Document(this.insertFile()).getNumberOfLines());
 //          
 //          methodInvocation.setExpression(ast.newSimpleName("logIn")); 
@@ -155,37 +212,65 @@ public boolean insertLog(String source, String name) throws SecurityException{
 //          StringLiteral literal = ast.newStringLiteral();
 //          literal.setLiteralValue("Level.INFO,\"OK\"");
 //          methodInvocation.arguments().add(literal);
-           
-
-            QualifiedName qName =
-                ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
-
-            methodInvocation.setExpression(qName);
-            methodInvocation.setName(ast.newSimpleName("println"));
-
-            StringLiteral literalStart = ast.newStringLiteral();
-            literalStart.setLiteralValue("Executando do metodo: " + name);
-
-            methodInvocation.arguments().add(literalStart);
-            
-
-
-            // Append the statement
-            methodDeclaration.getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
-           saveFile(pathsource,unit.toString());
-        }
-    }else{
-     
-     analise(methodDeclaration.getName().getIdentifier());
-
-     System.out.println(methodDeclaration.getName().getFullyQualifiedName());
+          
+        
+     }
+        node = null;
     }
- }
  return true;
  }
+
+public void insertLog(AST ast, CompilationUnit unit, ASTNode node) {
+    MethodInvocation methodInvocation = ast.newMethodInvocation();
+    QualifiedName qName =
+            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+
+        methodInvocation.setExpression(qName);
+        methodInvocation.setName(ast.newSimpleName("println"));
+
+        StringLiteral literal = ast.newStringLiteral();
+        literal.setLiteralValue("Passou aqui!");// + node);
+
+        methodInvocation.arguments().add(literal);
+        
+        // Append the statement
+        if(node instanceof MethodDeclaration) {
+        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
+        }
+       System.out.println(unit.getRoot().toString());
+       saveFile(pathCopy,unit.getRoot().toString());
+    
+}
  
  
- public Logger logIn() {
+
+public boolean ElementsSuite(String source) {
+  
+  ASTParser parser = ASTParser.newParser(AST.JLS8); 
+  parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
+  parser.setCompilerOptions(JavaCore.getOptions()); 
+  parser.setKind(ASTParser.K_COMPILATION_UNIT); 
+
+CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
+AST ast = unit.getAST(); 
+
+List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.getMethDeclarations(unit); 
+for (MethodDeclaration methodDeclaration : methodDeclarations) {  
+    List<SimpleName> simpleNames = MethodDeclarationFinder.getNames(methodDeclaration); 
+    for (SimpleName simpleName : simpleNames) {  
+
+        System.out.println(simpleName);
+        analise(simpleName); //////////////   
+    }
+}
+return true;
+}
+
+
+
+
+
+public Logger logIn() {
      
          log = Logger.getLogger("Log");
 
@@ -195,7 +280,6 @@ public boolean insertLog(String source, String name) throws SecurityException{
              }
              
         } catch (IOException e) {
-            // TODO Auto-generated catch block
            
         }
          filetxt.setFormatter(new SimpleFormatter());
