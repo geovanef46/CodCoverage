@@ -183,13 +183,16 @@ public boolean insertLog(String source, ASTNode node) {
 //    e.printStackTrace();
 //}
 
- List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.getMethDeclarations(unit); 
- for (MethodDeclaration methodDeclaration : methodDeclarations) {
+ List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
+ for (ASTNode astnode : astnodes) {
      
-     if (node != null) {
-         System.out.println(methodDeclaration.getName());
+     if (astnode instanceof MethodDeclaration ) {
+         if (((MethodDeclaration)astnode).getName().getIdentifier().equals()) {
+            
+        }
+     }
          //if(((SimpleName)node).toString().equals(methodDeclaration.getName())) {
-            insertLog(ast, unit, methodDeclaration);
+            insertLog(ast, unit, astnode);
             return true;
          //}falta implementar o nível de profundidade que deseja comparar metodos ou invocação de metodos ou expressoes/palavras
 
@@ -214,32 +217,34 @@ public boolean insertLog(String source, ASTNode node) {
 //          methodInvocation.arguments().add(literal);
           
         
-     }
-        node = null;
+     
+
     }
  return true;
  }
 
+
+
 public void insertLog(AST ast, CompilationUnit unit, ASTNode node) {
-    MethodInvocation methodInvocation = ast.newMethodInvocation();
-    QualifiedName qName =
-            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
-
-        methodInvocation.setExpression(qName);
-        methodInvocation.setName(ast.newSimpleName("println"));
-
-        StringLiteral literal = ast.newStringLiteral();
-        literal.setLiteralValue("Passou aqui!");// + node);
-
-        methodInvocation.arguments().add(literal);
-        
-        // Append the statement
-        if(node instanceof MethodDeclaration) {
-        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
-        }
-       System.out.println(unit.getRoot().toString());
-       saveFile(pathCopy,unit.getRoot().toString());
-    
+//    MethodInvocation methodInvocation = ast.newMethodInvocation();
+//    QualifiedName qName =
+//            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+//
+//        methodInvocation.setExpression(qName);
+//        methodInvocation.setName(ast.newSimpleName("println"));
+//
+//        StringLiteral literal = ast.newStringLiteral();
+//        literal.setLiteralValue("Passou aqui!");// + node);
+//
+//        methodInvocation.arguments().add(literal);
+//        
+//        // Append the statement
+//        if(node instanceof MethodDeclaration) {
+//        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
+//        }
+//       System.out.println(unit.getRoot().toString());
+//       saveFile(pathCopy,unit.getRoot().toString());
+    System.out.println("Salvo no arquivo");
 }
  
  
@@ -254,15 +259,12 @@ public boolean ElementsSuite(String source) {
 CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
 AST ast = unit.getAST(); 
 
-List<MethodDeclaration> methodDeclarations = MethodDeclarationFinder.getMethDeclarations(unit); 
-for (MethodDeclaration methodDeclaration : methodDeclarations) {  
-    List<SimpleName> simpleNames = MethodDeclarationFinder.getNames(methodDeclaration); 
-    for (SimpleName simpleName : simpleNames) {  
-
-        System.out.println(simpleName);
-        analise(simpleName); //////////////   
+List<ASTNode> ASTnodes = ASTnodeFinder.getASTnodes(unit); 
+for (ASTNode astnode : ASTnodes) {  
+    
+        //System.out.println(astnode.toString());
+        analise(astnode); //////////////   
     }
-}
 return true;
 }
 
@@ -290,13 +292,6 @@ public Logger logIn() {
     
 }
  
- 
- 
- 
- public boolean directoryNav() {
-     
-     return true;
- }
  
  
  public static void main(String[] args) {
