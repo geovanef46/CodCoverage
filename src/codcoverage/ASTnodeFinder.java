@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.security.auth.login.LoginContext;
+
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -35,6 +37,7 @@ import org.eclipse.jdt.core.dom.SimpleName;
           return super.visit(node);
            
         }
+      
         
         @Override
         public boolean visit (final PackageDeclaration node) {

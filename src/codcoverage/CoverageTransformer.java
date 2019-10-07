@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.StringLiteral;
@@ -54,8 +55,8 @@ public class CoverageTransformer {
     File pathCopy;
     Collection<File> files;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
-    Logger log = null;
-    FileHandler filetxt = null;
+    static Logger log = null;
+    static FileHandler filetxt = null;
     private static CoverageTransformer instance;
     
     private CoverageTransformer() {
@@ -153,7 +154,7 @@ public boolean analise(ASTNode node) {
 public boolean insertLog(String source, ASTNode node) {
 //     Document document = new Document(source);
      
-     Logger log = logIn(); //criando arquivo de log
+//     Logger log = logIn(); //criando arquivo de log
      
      ASTParser parser = ASTParser.newParser(AST.JLS3); 
      parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
@@ -163,31 +164,28 @@ public boolean insertLog(String source, ASTNode node) {
  CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
  AST ast = unit.getAST(); 
 
-// ImportDeclaration id = ast.newImportDeclaration();
-// id.setName(ast.newName("java.util.logging"));
-// ImportDeclaration id2 = ast.newImportDeclaration();
-// id2.setName(ast.newName(new String[] {"codcoverage", "CoverageTransformer"}));
-// 
-// ASTRewrite rewriter = ASTRewrite.create(ast);
-// ListRewrite lrw = rewriter.getListRewrite(unit, CompilationUnit.IMPORTS_PROPERTY);
-// lrw.insertLast(id, null);
-// lrw.insertLast(id2, null);
-// TextEdit edits = rewriter.rewriteAST(document, null);
-// try {
-//    edits.apply(document);
-//} catch (MalformedTreeException e) {
-//    // TODO Auto-generated catch block
-//    e.printStackTrace();
-//} catch (BadLocationException e) {
-//    // TODO Auto-generated catch block
-//    e.printStackTrace();
-//}
+ PackageDeclaration pd = ast.newPackageDeclaration();
+ pd.setName(ast.newQualifiedName(ast.newSimpleName("codcoverage"),ast.newSimpleName("target")));
+ 
+ ASTRewrite rewriter = ASTRewrite.create(ast);
+ PackageDeclaration pd2 = unit.getPackage();
+ pd2.setName(pd.getName());
+ ListRewrite listRewrite = rewriter.getListRewrite(pd2, unit.TYPES_PROPERTY);
+ TextEdit edits = rewriter.rewriteAST();
+ 
+ // apply the text edits to the compilation unit
+ Document document = new Document(source);
 
+ edits.apply(document);
+
+ 
+ 
  List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
  for (ASTNode astnode : astnodes) {
      
      if (astnode instanceof MethodDeclaration && node instanceof MethodInvocation) {
          if (((MethodDeclaration)astnode).getName().getIdentifier().equals(((MethodInvocation)node).getName().getIdentifier())) {
+           
              System.out.println("test "+node +"source:"+astnode);
              ast = insertLog(ast, unit, astnode);
              return true;
@@ -228,22 +226,25 @@ public boolean insertLog(String source, ASTNode node) {
 
 public AST insertLog(AST ast, CompilationUnit unit, ASTNode node) {
     MethodInvocation methodInvocation = ast.newMethodInvocation();
+    MethodInvocation methodInvocation2 = ast.newMethodInvocation();//logIn().info(msg);
     QualifiedName qName =
-            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+            ast.newQualifiedName(ast.newSimpleName("codcoverage"), ast.newSimpleName("CoverageTransformer"));
 
         methodInvocation.setExpression(qName);
-        methodInvocation.setName(ast.newSimpleName("println"));
-
-        StringLiteral literal = ast.newStringLiteral();
-        literal.setLiteralValue("Passou aqui!");
-
-        methodInvocation.arguments().add(literal);
+        methodInvocation.setName(ast.newSimpleName("logIn"));
+        methodInvocation2.setName(ast.newSimpleName("info"));
+        methodInvocation2.setExpression(methodInvocation);
+        
+        StringLiteral sl = ast.newStringLiteral();
+                sl.setLiteralValue("*"+unit.getLineNumber(node.getStartPosition())+"*");
+        methodInvocation2.arguments().add(sl);
+        
         
         // Append the statement
         if(node instanceof MethodDeclaration) {
-        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
+        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation2));
         }else {
-        node.setProperty(methodInvocation.getName().getIdentifier(), ast.newExpressionStatement(methodInvocation));
+        node.setProperty(methodInvocation2.getName().getIdentifier(), ast.newExpressionStatement(methodInvocation2));
 //       System.out.println(unit.getRoot().toString());
         }
        saveFile(pathCopy,unit.getRoot().toString());
@@ -276,7 +277,7 @@ return true;
 
 
 
-public Logger logIn() {
+public static Logger logIn() {
      
          log = Logger.getLogger("Log");
 
