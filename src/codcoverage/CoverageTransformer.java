@@ -155,7 +155,7 @@ public boolean insertLog(String source, ASTNode node) {
      
      Logger log = logIn(); //criando arquivo de log
      
-     ASTParser parser = ASTParser.newParser(AST.JLS8); 
+     ASTParser parser = ASTParser.newParser(AST.JLS3); 
      parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
      parser.setCompilerOptions(JavaCore.getOptions()); 
      parser.setKind(ASTParser.K_COMPILATION_UNIT); 
@@ -186,14 +186,15 @@ public boolean insertLog(String source, ASTNode node) {
  List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
  for (ASTNode astnode : astnodes) {
      
-     if (astnode instanceof MethodDeclaration ) {
-         if (((MethodDeclaration)astnode).getName().getIdentifier().equals()) {
-            
+     if (astnode instanceof MethodDeclaration && node instanceof MethodInvocation) {
+         if (((MethodDeclaration)astnode).getName().getIdentifier().equals(((MethodInvocation)node).getName().getIdentifier())) {
+             System.out.println("test "+node +"source:"+astnode);
+             ast = insertLog(ast, unit, astnode);
+             return true;
         }
      }
          //if(((SimpleName)node).toString().equals(methodDeclaration.getName())) {
-            insertLog(ast, unit, astnode);
-            return true;
+
          //}falta implementar o nível de profundidade que deseja comparar metodos ou invocação de metodos ou expressoes/palavras
 
 
@@ -225,33 +226,36 @@ public boolean insertLog(String source, ASTNode node) {
 
 
 
-public void insertLog(AST ast, CompilationUnit unit, ASTNode node) {
-//    MethodInvocation methodInvocation = ast.newMethodInvocation();
-//    QualifiedName qName =
-//            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
-//
-//        methodInvocation.setExpression(qName);
-//        methodInvocation.setName(ast.newSimpleName("println"));
-//
-//        StringLiteral literal = ast.newStringLiteral();
-//        literal.setLiteralValue("Passou aqui!");// + node);
-//
-//        methodInvocation.arguments().add(literal);
-//        
-//        // Append the statement
-//        if(node instanceof MethodDeclaration) {
-//        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
-//        }
+public AST insertLog(AST ast, CompilationUnit unit, ASTNode node) {
+    MethodInvocation methodInvocation = ast.newMethodInvocation();
+    QualifiedName qName =
+            ast.newQualifiedName(ast.newSimpleName("System"), ast.newSimpleName("out"));
+
+        methodInvocation.setExpression(qName);
+        methodInvocation.setName(ast.newSimpleName("println"));
+
+        StringLiteral literal = ast.newStringLiteral();
+        literal.setLiteralValue("Passou aqui!");
+
+        methodInvocation.arguments().add(literal);
+        
+        // Append the statement
+        if(node instanceof MethodDeclaration) {
+        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation));
+        }else {
+        node.setProperty(methodInvocation.getName().getIdentifier(), ast.newExpressionStatement(methodInvocation));
 //       System.out.println(unit.getRoot().toString());
-//       saveFile(pathCopy,unit.getRoot().toString());
+        }
+       saveFile(pathCopy,unit.getRoot().toString());
     System.out.println("Salvo no arquivo");
+    return ast;
 }
  
  
 
 public boolean ElementsSuite(String source) {
   
-  ASTParser parser = ASTParser.newParser(AST.JLS8); 
+  ASTParser parser = ASTParser.newParser(AST.JLS3); 
   parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
   parser.setCompilerOptions(JavaCore.getOptions()); 
   parser.setKind(ASTParser.K_COMPILATION_UNIT); 
