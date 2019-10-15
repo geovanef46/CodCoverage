@@ -1,42 +1,29 @@
 package codcoverage.source.src.example;
 codcoverage.CoverageTransformer.logIn().info("*1*");
-codcoverage.CoverageTransformer.logIn().info("*1*");
 
 
-codcoverage.CoverageTransformer.logIn().info("*3*");
 import java.util.HashSet;
-codcoverage.CoverageTransformer.logIn().info("*5*");
 import java.util.Set;
-codcoverage.CoverageTransformer.logIn().info("*4*");
-codcoverage.CoverageTransformer.logIn().info("*5*");
 
 
  
 public class Triangle { 
-codcoverage.CoverageTransformer.logIn().info("*9*");
    
 
     private double side1; 
-codcoverage.CoverageTransformer.logIn().info("*12*");
     private double side2; 
-codcoverage.CoverageTransformer.logIn().info("*13*");
     private double side3; 
-codcoverage.CoverageTransformer.logIn().info("*14*");
  
     public Triangle(double side1, double side2, double side3) throws TriangleException { 
 codcoverage.CoverageTransformer.logIn().info("*16*");
 
         this.side1 = side1; 
-codcoverage.CoverageTransformer.logIn().info("*18*");
         this.side2 = side2; 
-codcoverage.CoverageTransformer.logIn().info("*19*");
         this.side3 = side3; 
-codcoverage.CoverageTransformer.logIn().info("*20*");
  
         if (allSidesAreZero() || hasImpossibleSides() || violatesTriangleInequality()) { 
 codcoverage.CoverageTransformer.logIn().info("*22*");
             throw new TriangleException(); 
-codcoverage.CoverageTransformer.logIn().info("*23*");
         }
 
     } 
@@ -86,7 +73,6 @@ codcoverage.CoverageTransformer.logIn().info("*53*");
     public int getNumberOfUniqueSides() { 
 codcoverage.CoverageTransformer.logIn().info("*57*");
         Set<Double> sides = new HashSet<>(); 
-codcoverage.CoverageTransformer.logIn().info("*58*");
  
         sides.add(side1); 
 codcoverage.CoverageTransformer.logIn().info("*60*");

@@ -129,6 +129,17 @@ public void saveFile(File path,String data, ASTNode methodInvocation) {
 }
 
 
+public void saveFile(File path, String data) {
+    try {
+        FileUtils.write(path, data);
+        System.out.println("arquivo salvo em " + path.getPath());
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
+
 public boolean analise() {
     if(files == null) {
     String source = "src/codcoverage/source/src/example/";
@@ -185,17 +196,7 @@ public boolean insertLog(String source) {
  
  List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
  for (ASTNode astnode : astnodes) {
-     
-     if(astnode instanceof PackageDeclaration) {
-         unit.getPackage().delete();
-        PackageDeclaration pd = ast.newPackageDeclaration();
-        pd.setName(ast.newName("codcoverage.target"));//this.pathTargetold.toString()));
-        unit.setPackage(pd);
-     }
-     if(astnode instanceof EnumConstantDeclaration) {
-         return true;
-     }
-     
+ 
      
      if(currentLine != unit.getLineNumber(astnode.getStartPosition())) {
          if(linhas.indexOf(currentLine)!=-1)
@@ -208,7 +209,8 @@ public boolean insertLog(String source) {
  
  for (Integer linha : linhas) {
      currentLine = linha;
-     insertLog(ast, unit);   
+     insertLog(ast, unit);
+     insertPackage(pathCopy.getPath());
 }
  
  
@@ -233,13 +235,43 @@ public void insertLog(AST ast, CompilationUnit unit) {
         methodInvocation2.arguments().add(sl);
        // System.out.println(methodInvocation2.toString());
         
-        
+       // saveFile(pathCopy, unit.getRoot().toString());
     
        saveFile(pathCopy,insertFile(pathCopy.toString()), methodInvocation2);
   ///  System.out.println("Salvo no arquivo");
 
 }
  
+
+public boolean insertPackage(String source) {
+
+  
+ ASTParser parser = ASTParser.newParser(AST.JLS3);
+ parser.setSource(insertFile(source).toCharArray()); // adicionar o// source ao parser
+ parser.setCompilerOptions(JavaCore.getOptions());
+ parser.setKind(ASTParser.K_COMPILATION_UNIT);
+
+ CompilationUnit unit = (CompilationUnit) parser.createAST(null);
+ //criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
+
+ 
+ AST ast = unit.getAST(); 
+List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
+for (ASTNode astnode : astnodes) {
+  
+  if(astnode instanceof PackageDeclaration) {
+      unit.getPackage().delete();
+     PackageDeclaration pd = ast.newPackageDeclaration();
+     pd.setName(ast.newName("target"));//this.pathTargetold.toString()));
+     unit.setPackage(pd);
+     return true;
+  }
+  saveFile(pathCopy, unit.getRoot().toString());
+}
+  
+return true;
+}
+
 
 
 

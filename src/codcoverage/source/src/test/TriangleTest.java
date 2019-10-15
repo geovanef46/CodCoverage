@@ -6,9 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import codcoverage.source.src.example.Triangle;
-import codcoverage.source.src.example.TriangleException;
-import codcoverage.source.src.example.TriangleKind;
+import codcoverage.source.src.example.*;
+
 
 public class TriangleTest { 
 	 
