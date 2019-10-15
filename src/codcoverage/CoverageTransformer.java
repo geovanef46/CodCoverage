@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
@@ -26,6 +27,8 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
+import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
@@ -59,8 +62,8 @@ public class CoverageTransformer {
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
     static Logger log = null;
     static FileHandler filetxt = null;
-    int currentLine = 0;
-    List<Integer> linhas = new ArrayList<>();
+    int currentLine = 1;
+    List<Integer> linhas = new ArrayList<Integer>();
     private static CoverageTransformer instance;
     
     private CoverageTransformer() {
@@ -164,12 +167,12 @@ public boolean insertLog(String source) {
     ASTParser parser = ASTParser.newParser(AST.JLS3);
     parser.setSource(insertFile(source).toCharArray()); // adicionar o// source ao parser
    
-    Map<String, String> options = JavaCore.getOptions();
-    options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
-    options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
-    options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
-    
-    parser.setCompilerOptions(options);
+//    Map<String, String> options = JavaCore.getOptions();
+//    options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+//    options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
+//    options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+//    
+    parser.setCompilerOptions(JavaCore.getOptions());
     parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
     CompilationUnit unit = (CompilationUnit) parser.createAST(null);
@@ -189,9 +192,13 @@ public boolean insertLog(String source) {
         pd.setName(ast.newName("codcoverage.target"));//this.pathTargetold.toString()));
         unit.setPackage(pd);
      }
+     if(astnode instanceof EnumConstantDeclaration) {
+         return true;
+     }
      
      
      if(currentLine != unit.getLineNumber(astnode.getStartPosition())) {
+         if(linhas.indexOf(currentLine)!=-1)
          currentLine = unit.getLineNumber(astnode.getStartPosition());
        linhas.add(currentLine);
      }

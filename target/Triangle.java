@@ -1,20 +1,15 @@
 package codcoverage.source.src.example;
 codcoverage.CoverageTransformer.logIn().info("*1*");
 codcoverage.CoverageTransformer.logIn().info("*1*");
-codcoverage.CoverageTransformer.logIn().info("*1*");
+
 
 codcoverage.CoverageTransformer.logIn().info("*3*");
-
-codcoverage.CoverageTransformer.logIn().info("*5*");
-codcoverage.CoverageTransformer.logIn().info("*3*");
-codcoverage.CoverageTransformer.logIn().info("*5*");
-codcoverage.CoverageTransformer.logIn().info("*4*");
 import java.util.HashSet;
+codcoverage.CoverageTransformer.logIn().info("*5*");
 import java.util.Set;
 codcoverage.CoverageTransformer.logIn().info("*4*");
 codcoverage.CoverageTransformer.logIn().info("*5*");
 
-codcoverage.CoverageTransformer.logIn().info("*6*");
 
  
 public class Triangle { 
