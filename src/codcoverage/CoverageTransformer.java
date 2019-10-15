@@ -9,15 +9,17 @@ package codcoverage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
-
+import org.apache.commons.io.FileSystemUtils;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
@@ -50,13 +52,15 @@ import org.eclipse.text.edits.TextEdit;
  **/
 public class CoverageTransformer {
     String pathSource = "src/codcoverage/source/src/example/";
-    File pathTarget = new File("src/codcoverage/target/");
+    File pathTarget = new File("./target/");
     File pathTargetold = pathTarget;
     File pathCopy;
     Collection<File> files;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
     static Logger log = null;
     static FileHandler filetxt = null;
+    int currentLine = 0;
+    List<Integer> linhas = new ArrayList<>();
     private static CoverageTransformer instance;
     
     private CoverageTransformer() {
@@ -99,9 +103,21 @@ public void copyFile(String path, String name) {
      
 }
 
-public void saveFile(File path,String data) {
+public void saveFile(File path,String data, ASTNode methodInvocation) {
     try {
-        FileUtils.write(path, data);
+        String[] list = data.split("\n");
+        List<String> lista = new ArrayList<String>();
+        for (int i = 0; i < list.length; i++) {
+            lista.add(list[i]);
+        }
+        if(currentLine > 0) {
+        lista.add(currentLine+linhas.indexOf(currentLine),methodInvocation.toString()+";");
+        }else {
+            lista.add(currentLine,methodInvocation.toString());
+        }
+
+        FileUtils.writeLines(path, lista);
+       
         System.out.println("arquivo salvo em "+path.getPath());
     } catch (IOException e) {
         // TODO Auto-generated catch block
@@ -111,13 +127,6 @@ public void saveFile(File path,String data) {
 
 
 public boolean analise() {
-    
-    ElementsSuite(testSuite);
-    return true;
-}
-
-
-public boolean analise(ASTNode node) {
     if(files == null) {
     String source = "src/codcoverage/source/src/example/";
     String[] extensions = {"java"};
@@ -131,13 +140,13 @@ public boolean analise(ASTNode node) {
  
      System.out.println("Obtido: "+pathCopy.getName());
      pathCopy = pathTarget;
-     insertLog(pathCopy.toString(),node);
+     insertLog(pathCopy.toString());
  }
     }else {
         for(File file : files) {
             System.out.println("Obtido: "+pathCopy.getName());
             pathCopy = pathTarget;
-            insertLog(pathCopy.toString(),node);
+            insertLog(pathCopy.toString());
         }
     }
 
@@ -145,86 +154,63 @@ public boolean analise(ASTNode node) {
 }
 
  
- /**
-  * Inserir um trecho de código para log nos métodos especificos 
-  * tratados pelo teste. 
- * @return 
- * 
- */
-public boolean insertLog(String source, ASTNode node) {
+ 
+
+public boolean insertLog(String source) {
 //     Document document = new Document(source);
      
 //     Logger log = logIn(); //criando arquivo de log
      
-     ASTParser parser = ASTParser.newParser(AST.JLS3); 
-     parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
-     parser.setCompilerOptions(JavaCore.getOptions()); 
-     parser.setKind(ASTParser.K_COMPILATION_UNIT); 
+    ASTParser parser = ASTParser.newParser(AST.JLS3);
+    parser.setSource(insertFile(source).toCharArray()); // adicionar o// source ao parser
+   
+    Map<String, String> options = JavaCore.getOptions();
+    options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+    options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
+    options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+    
+    parser.setCompilerOptions(options);
+    parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
- CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
- AST ast = unit.getAST(); 
-
- PackageDeclaration pd = ast.newPackageDeclaration();
- pd.setName(ast.newQualifiedName(ast.newSimpleName("codcoverage"),ast.newSimpleName("target")));
+    CompilationUnit unit = (CompilationUnit) parser.createAST(null);
+    //criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
  
- ASTRewrite rewriter = ASTRewrite.create(ast);
- PackageDeclaration pd2 = unit.getPackage();
- pd2.setName(pd.getName());
- ListRewrite listRewrite = rewriter.getListRewrite(pd2, unit.TYPES_PROPERTY);
- TextEdit edits = rewriter.rewriteAST();
- 
- // apply the text edits to the compilation unit
- Document document = new Document(source);
+    
+    AST ast = unit.getAST(); 
 
- edits.apply(document);
 
- 
  
  List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit); 
  for (ASTNode astnode : astnodes) {
      
-     if (astnode instanceof MethodDeclaration && node instanceof MethodInvocation) {
-         if (((MethodDeclaration)astnode).getName().getIdentifier().equals(((MethodInvocation)node).getName().getIdentifier())) {
-           
-             System.out.println("test "+node +"source:"+astnode);
-             ast = insertLog(ast, unit, astnode);
-             return true;
-        }
+     if(astnode instanceof PackageDeclaration) {
+         unit.getPackage().delete();
+        PackageDeclaration pd = ast.newPackageDeclaration();
+        pd.setName(ast.newName("codcoverage.target"));//this.pathTargetold.toString()));
+        unit.setPackage(pd);
      }
-         //if(((SimpleName)node).toString().equals(methodDeclaration.getName())) {
-
-         //}falta implementar o nível de profundidade que deseja comparar metodos ou invocação de metodos ou expressoes/palavras
-
-
-
-//         List<MethodInvocation> methodInvocations = MethodDeclarationFinder.getInvocations(methodDeclaration);
-//         for (MethodInvocation methodInvocation : methodInvocations) {
-//     
-//             if(name == methodInvocation.getName().getIdentifier()) {
-//                 insertLog(ast, unit, methodInvocation);
-//                 return true;
-//
-//              }
-          //log.log(Level.INFO,"#"+new org.eclipse.jface.text.Document(this.insertFile()).getNumberOfLines());
-//          
-//          methodInvocation.setExpression(ast.newSimpleName("logIn")); 
-//         
-//          methodInvocation.setName(ast.newSimpleName("log"));
-//          
-//          StringLiteral literal = ast.newStringLiteral();
-//          literal.setLiteralValue("Level.INFO,\"OK\"");
-//          methodInvocation.arguments().add(literal);
-          
-        
      
-
+     
+     if(currentLine != unit.getLineNumber(astnode.getStartPosition())) {
+         currentLine = unit.getLineNumber(astnode.getStartPosition());
+       linhas.add(currentLine);
+     }
+    
     }
+ 
+ 
+ for (Integer linha : linhas) {
+     currentLine = linha;
+     insertLog(ast, unit);   
+}
+ 
+ 
  return true;
  }
 
 
 
-public AST insertLog(AST ast, CompilationUnit unit, ASTNode node) {
+public void insertLog(AST ast, CompilationUnit unit) {
     MethodInvocation methodInvocation = ast.newMethodInvocation();
     MethodInvocation methodInvocation2 = ast.newMethodInvocation();//logIn().info(msg);
     QualifiedName qName =
@@ -236,43 +222,17 @@ public AST insertLog(AST ast, CompilationUnit unit, ASTNode node) {
         methodInvocation2.setExpression(methodInvocation);
         
         StringLiteral sl = ast.newStringLiteral();
-                sl.setLiteralValue("*"+unit.getLineNumber(node.getStartPosition())+"*");
+                sl.setLiteralValue("*"+currentLine+"*");
         methodInvocation2.arguments().add(sl);
+       // System.out.println(methodInvocation2.toString());
         
         
-        // Append the statement
-        if(node instanceof MethodDeclaration) {
-        ((MethodDeclaration) node).getBody().statements().add(0, ast.newExpressionStatement(methodInvocation2));
-        }else {
-        node.setProperty(methodInvocation2.getName().getIdentifier(), ast.newExpressionStatement(methodInvocation2));
-//       System.out.println(unit.getRoot().toString());
-        }
-       saveFile(pathCopy,unit.getRoot().toString());
-    System.out.println("Salvo no arquivo");
-    return ast;
-}
- 
- 
-
-public boolean ElementsSuite(String source) {
-  
-  ASTParser parser = ASTParser.newParser(AST.JLS3); 
-  parser.setSource(insertFile(source).toCharArray()); //adicionar o source ao parser
-  parser.setCompilerOptions(JavaCore.getOptions()); 
-  parser.setKind(ASTParser.K_COMPILATION_UNIT); 
-
-CompilationUnit unit = (CompilationUnit) parser.createAST(null);//criar AST do tipo CompilationUnit (a raiz contem o arquivo completo) 
-AST ast = unit.getAST(); 
-
-List<ASTNode> ASTnodes = ASTnodeFinder.getASTnodes(unit); 
-for (ASTNode astnode : ASTnodes) {  
     
-        //System.out.println(astnode.toString());
-        analise(astnode); //////////////   
-    }
-return true;
-}
+       saveFile(pathCopy,insertFile(pathCopy.toString()), methodInvocation2);
+  ///  System.out.println("Salvo no arquivo");
 
+}
+ 
 
 
 
