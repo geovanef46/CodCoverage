@@ -39,12 +39,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
         }
         
         
-        @Override
-        public boolean visit (final IfStatement node) {
-          astnodes.add (node);
-          return super.visit(node);
-           
-        }
+
       
 //        @Override
 //        public boolean visit (final EnumConstantDeclaration node) {
@@ -75,19 +70,33 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
         }
         
         @Override
-        public boolean visit (final ReturnStatement node) {
+        public boolean visit (final IfStatement node) {
           astnodes.add (node);
           return super.visit(node);
            
         }
+        
+//        @Override
+//        public boolean visit (final ReturnStatement node) {
+//          astnodes.add (node);
+//          return super.visit(node);
+//           
+//        }
 //        
-        @Override
-        public boolean visit (final PackageDeclaration node) {
-          astnodes.add (node);
-          return super.visit(node);
-           
-        }
+//        @Override
+//        public boolean visit (final PackageDeclaration node) {
+//          astnodes.add (node);
+//          return super.visit(node);
+//           
+//        }
 //        
+        
+//      public boolean visit (final SimpleName node) {
+//      astnodes.add (node);
+//      return super.visit(node);
+//       
+//    }
+        
         @Override
         public boolean visit (final MethodInvocation node) {
           astnodes.add (node);
@@ -95,11 +104,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
            
         }
 //        
-//        public boolean visit (final SimpleName node) {
-//            astnodes.add (node);
-//            return super.visit(node);
-//             
-//          }
+
         
         public boolean visit (final MethodDeclaration  node) {
             astnodes.add (node);

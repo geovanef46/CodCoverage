@@ -203,7 +203,7 @@ public boolean insertLog(String source) {
      
      if(currentLine != unit.getLineNumber(astnode.getStartPosition())) {
          if(linhas.indexOf(currentLine)!=-1)
-         currentLine = unit.getLineNumber(astnode.getStartPosition()-2);
+         currentLine = unit.getLineNumber(astnode.getStartPosition());
        linhas.add(currentLine);
      }
     
@@ -213,7 +213,7 @@ public boolean insertLog(String source) {
  for (Integer linha : linhas) {
      currentLine = linha;
      insertLog(ast, unit);
-     insertPackage(pathCopy.getPath());
+    // insertPackage(pathCopy.getPath());
 }
  
  
@@ -225,8 +225,8 @@ public boolean insertLog(String source) {
 public void insertLog(AST ast, CompilationUnit unit) {
     MethodInvocation methodInvocation = ast.newMethodInvocation();
     MethodInvocation methodInvocation2 = ast.newMethodInvocation();//logIn().info(msg);
-    QualifiedName qName =
-            ast.newQualifiedName(ast.newSimpleName("codcoverage"), ast.newSimpleName("CoverageTransformer"));
+    SimpleName qName =
+            ast.newSimpleName("CoverageTransformer");
 
         methodInvocation.setExpression(qName);
         methodInvocation.setName(ast.newSimpleName("logIn"));
@@ -234,8 +234,11 @@ public void insertLog(AST ast, CompilationUnit unit) {
         methodInvocation2.setExpression(methodInvocation);
         
         StringLiteral sl = ast.newStringLiteral();
-                sl.setLiteralValue("*"+currentLine+"*");
-        methodInvocation2.arguments().add(sl);
+                sl.setLiteralValue(pathCopy.getName());
+        methodInvocation.arguments().add(sl);
+        StringLiteral sl2 = ast.newStringLiteral();
+        sl2.setLiteralValue("*"+currentLine+"*");
+methodInvocation2.arguments().add(sl2);
        // System.out.println(methodInvocation2.toString());
         
        // saveFile(pathCopy, unit.getRoot().toString());
@@ -279,13 +282,13 @@ return true;
 
 
 
-public static Logger logIn() {
+public static Logger logIn(String logName) {
      
          log = Logger.getLogger("Log");
 
          try {
              if(filetxt == null) {
-                 filetxt = new FileHandler("loggin.txt");
+                 filetxt = new FileHandler(logName+".txt");
              }
              
         } catch (IOException e) {
