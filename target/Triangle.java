@@ -1,6 +1,7 @@
 package target;
 import java.util.HashSet;
 import java.util.Set;
+import codcoverage.CoverageTransformer;
 public class Triangle {
   private double side1;
   private double side2;

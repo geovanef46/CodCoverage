@@ -41,19 +41,19 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
         
 
       
-//        @Override
-//        public boolean visit (final EnumConstantDeclaration node) {
-//          astnodes.add (node);
-//          return super.visit(node);
-//           
-//        }
-//        
-//        @Override
-//        public boolean visit (final EnumDeclaration node) {
-//          astnodes.add (node);
-//          return super.visit(node);
-//           
-//        }
+        @Override
+        public boolean visit (final EnumConstantDeclaration node) {
+          astnodes.add (node);
+          return super.visit(node);
+           
+        }
+        
+        @Override
+        public boolean visit (final EnumDeclaration node) {
+          astnodes.add (node);
+          return super.visit(node);
+           
+        }
         
         @Override
         public boolean visit (final VariableDeclarationExpression node) {

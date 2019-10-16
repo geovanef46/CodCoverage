@@ -114,6 +114,9 @@ public class CoverageTransformer {
                 if (position < lista.size() && position != 1) {
                     lista.add(position, methodInvocation.toString() + ";");
                 }
+//                if (position ==1) {
+//                    lista.add(position, importLog.toString()+";");
+//                }
             } else {
                 lista.add(currentLine, methodInvocation.toString());
             }
@@ -172,7 +175,7 @@ public class CoverageTransformer {
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(insertFile(source).toCharArray()); // adicionar o//
                                                             // source ao parser
-
+//
         // Map<String, String> options = JavaCore.getOptions();
         // options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
         // options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM,
@@ -233,8 +236,7 @@ public class CoverageTransformer {
         // System.out.println(methodInvocation2.toString());
 
         // saveFile(pathCopy, unit.getRoot().toString());
-
-        saveFile(pathCopy, insertFile(pathCopy.toString()), methodInvocation2);
+                saveFile(pathCopy, insertFile(pathCopy.toString()), methodInvocation2);
         /// System.out.println("Salvo no arquivo");
 
     }
@@ -260,8 +262,9 @@ public class CoverageTransformer {
                 pd.setName(ast.newName("target"));// this.pathTargetold.toString()));
                 unit.setPackage(pd);
                 
-                ast.newImportDeclaration().setName(ast.newQualifiedName(ast.newSimpleName("codcoverage"),ast.newSimpleName("CoverageTransformer")));
-                //falta inserir este import
+                ImportDeclaration id = ast.newImportDeclaration();
+                id.setName(ast.newQualifiedName(ast.newSimpleName("codcoverage"),ast.newSimpleName("CoverageTransformer")));
+               unit.imports().add(id);
             }
             
             saveFile(pathCopy, unit.getRoot().toString());
