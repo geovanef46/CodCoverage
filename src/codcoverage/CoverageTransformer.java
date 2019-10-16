@@ -111,10 +111,13 @@ public void saveFile(File path,String data, ASTNode methodInvocation) {
         String[] list = data.split("\n");
         List<String> lista = new ArrayList<String>();
         for (int i = 0; i < list.length; i++) {
-            lista.add(list[i]);
+            lista.add(i,list[i]);
         }
+        int position = currentLine+linhas.indexOf(currentLine);
         if(currentLine > 0) {
-        lista.add(currentLine+linhas.indexOf(currentLine),methodInvocation.toString()+";");
+            if(position <= lista.size()) {
+        lista.add(position,methodInvocation.toString()+";");
+            }
         }else {
             lista.add(currentLine,methodInvocation.toString());
         }
@@ -200,7 +203,7 @@ public boolean insertLog(String source) {
      
      if(currentLine != unit.getLineNumber(astnode.getStartPosition())) {
          if(linhas.indexOf(currentLine)!=-1)
-         currentLine = unit.getLineNumber(astnode.getStartPosition());
+         currentLine = unit.getLineNumber(astnode.getStartPosition()-2);
        linhas.add(currentLine);
      }
     

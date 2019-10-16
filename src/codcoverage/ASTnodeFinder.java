@@ -45,7 +45,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
           return super.visit(node);
            
         }
-//      
+      
 //        @Override
 //        public boolean visit (final EnumConstantDeclaration node) {
 //          astnodes.add (node);
@@ -73,7 +73,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
           return super.visit(node);
            
         }
-//        
+        
         @Override
         public boolean visit (final ReturnStatement node) {
           astnodes.add (node);
