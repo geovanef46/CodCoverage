@@ -83,12 +83,12 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 //           
 //        }
 //        
-//        @Override
-//        public boolean visit (final PackageDeclaration node) {
-//          astnodes.add (node);
-//          return super.visit(node);
-//           
-//        }
+        @Override
+        public boolean visit (final PackageDeclaration node) {
+          astnodes.add (node);
+          return super.visit(node);
+           
+        }
 //        
         
 //      public boolean visit (final SimpleName node) {
