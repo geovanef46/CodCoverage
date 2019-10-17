@@ -51,13 +51,13 @@ import org.eclipse.text.edits.TextEdit;
  **/
 public class CoverageTransformer {
     String pathSource = "src/codcoverage/source/src/example/";
-    File pathTarget = new File("./target/");
+    File pathTarget = new File("src/coverage/target/");
     File pathTargetold = pathTarget;
     File pathCopy;
     Collection<File> files;
     String testSuite = "src/codcoverage/source/src/test/TriangleTest.java";
-    static Logger log = null;
-    static FileHandler filetxt = null;
+    Logger log = null;
+    FileHandler filetxt = null;
     int currentLine = 1;
     List<Integer> linhas = new ArrayList<Integer>();
     private static CoverageTransformer instance;
@@ -112,11 +112,12 @@ public class CoverageTransformer {
             int position = currentLine + linhas.indexOf(currentLine);
             if (currentLine > 0) {
                 if (position < lista.size() && position != 1) {
+                    if(currentLine == 64) {
+                        position--;
+                    }
                     lista.add(position, methodInvocation.toString() + ";");
                 }
-//                if (position ==1) {
-//                    lista.add(position, importLog.toString()+";");
-//                }
+
             } else {
                 lista.add(currentLine, methodInvocation.toString());
             }
@@ -176,29 +177,28 @@ public class CoverageTransformer {
         parser.setSource(insertFile(source).toCharArray()); // adicionar o//
                                                             // source ao parser
 //
-        // Map<String, String> options = JavaCore.getOptions();
-        // options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
-        // options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM,
-        // JavaCore.VERSION_1_5);
-        // options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
-        //
-        parser.setCompilerOptions(JavaCore.getOptions());
+         Map<String, String> options = JavaCore.getOptions();
+         options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+         options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM,
+         JavaCore.VERSION_1_5);
+         options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+        
+        parser.setCompilerOptions(options);
         parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
         CompilationUnit unit = (CompilationUnit) parser.createAST(null);
         // criar AST do tipo CompilationUnit (a raiz contem o arquivo completo)
 
         AST ast = unit.getAST();
-
         List<ASTNode> astnodes = ASTnodeFinder.getASTnodes(unit);
         for (ASTNode astnode : astnodes) {
 
             if (currentLine != unit.getLineNumber(astnode.getStartPosition())) {
-                if (linhas.indexOf(currentLine) != -1)
+                    
                     currentLine = unit.getLineNumber(astnode.getStartPosition());
-                linhas.add(currentLine);
+                    linhas.add(currentLine);
+                    
             }
-
         }
 
         for (Integer linha : linhas) {
@@ -232,12 +232,9 @@ public class CoverageTransformer {
         StringLiteral sl2 = ast.newStringLiteral();
         sl2.setLiteralValue("*" + currentLine + "*");
         methodInvocation2.arguments().add(sl2);
-        
-        // System.out.println(methodInvocation2.toString());
 
-        // saveFile(pathCopy, unit.getRoot().toString());
                 saveFile(pathCopy, insertFile(pathCopy.toString()), methodInvocation2);
-        /// System.out.println("Salvo no arquivo");
+
 
     }
 
@@ -246,7 +243,13 @@ public class CoverageTransformer {
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(insertFile(source).toCharArray()); // adicionar o//
                                                             // source ao parser
-        parser.setCompilerOptions(JavaCore.getOptions());
+        Map<String, String> options = JavaCore.getOptions();
+        options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+        options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM,
+        JavaCore.VERSION_1_5);
+        options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+       
+       parser.setCompilerOptions(options);
         parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
         CompilationUnit unit = (CompilationUnit) parser.createAST(null);
@@ -259,7 +262,7 @@ public class CoverageTransformer {
             if (astnode instanceof PackageDeclaration) {
                 unit.getPackage().delete();
                 PackageDeclaration pd = ast.newPackageDeclaration();
-                pd.setName(ast.newName("target"));// this.pathTargetold.toString()));
+                pd.setName(ast.newName("coverage.target"));// this.pathTargetold.toString()));
                 unit.setPackage(pd);
                 
                 ImportDeclaration id = ast.newImportDeclaration();
@@ -274,24 +277,21 @@ public class CoverageTransformer {
         return true;
     }
 
-    public static Logger logIn(String logName) {
+    public Logger logIn(String logName) {
 
         log = Logger.getLogger("Log");
 
         try {
             if (filetxt == null) {
                 filetxt = new FileHandler(logName + ".txt");
+                filetxt.setFormatter(new SimpleFormatter());
+                log.addHandler(filetxt);
             }
 
         } catch (IOException e) {
 
         }
-        filetxt.setFormatter(new SimpleFormatter());
-
-        log.addHandler(filetxt);
-
         return log;
-
     }
 
     public static void main(String[] args) {
@@ -299,13 +299,6 @@ public class CoverageTransformer {
         CoverageTransformer cc = CoverageTransformer.getInstance();
         cc.analise();
 
-        // CoverageTransformer cc = new CoverageTransformer();
-        // try {
-        // cc.insertLog();
-        // } catch (SecurityException e) {
-        // System.out.println("Erro de assinatura da biblioteca..."+
-        // e.getMessage());
-        // }
 
     }
 

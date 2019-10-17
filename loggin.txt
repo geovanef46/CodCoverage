@@ -1,0 +1,572 @@
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *32*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *32*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *32*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *36*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *22*
+out 17, 2019 2:43:22 AM coverage.target.TriangleException <init>
+INFORMAÇÕES: *5*
+out 17, 2019 2:43:22 AM coverage.target.Triangle <init>
+INFORMAÇÕES: *16*
+out 17, 2019 2:43:22 AM coverage.target.Triangle allSidesAreZero
+INFORMAÇÕES: *44*
+out 17, 2019 2:43:22 AM coverage.target.Triangle hasImpossibleSides
+INFORMAÇÕES: *48*
+out 17, 2019 2:43:22 AM coverage.target.Triangle violatesTriangleInequality
+INFORMAÇÕES: *52*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *28*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *57*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *60*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *61*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *62*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getNumberOfUniqueSides
+INFORMAÇÕES: *64*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *30*
+out 17, 2019 2:43:22 AM coverage.target.Triangle getKind
+INFORMAÇÕES: *32*

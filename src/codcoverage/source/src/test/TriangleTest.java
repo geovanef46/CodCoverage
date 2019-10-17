@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 
-import codcoverage.source.src.example.*;
+import codcoverage.CoverageTestRunner;
+import coverage.target.*;
 
 
+@RunWith(CoverageTestRunner.class)
 public class TriangleTest { 
 	 
     @Test
