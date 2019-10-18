@@ -206,7 +206,7 @@ public class CoverageTransformer {
             insertLog(ast, unit);
             
         }
-        insertPackage(pathCopy.getPath());
+        insertPackage(pathCopy.getPath(), pathCopy);
 
         return true;
     }
@@ -238,7 +238,7 @@ public class CoverageTransformer {
 
     }
 
-    public boolean insertPackage(String source) {
+    public boolean insertPackage(String source, File path) {
 
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(insertFile(source).toCharArray()); // adicionar o//
@@ -270,7 +270,7 @@ public class CoverageTransformer {
                unit.imports().add(id);
             }
             
-            saveFile(pathCopy, unit.getRoot().toString());
+            saveFile(path, unit.getRoot().toString());
             return true;
         }
 
@@ -286,6 +286,8 @@ public class CoverageTransformer {
                 filetxt = new FileHandler(logName + ".txt");
                 filetxt.setFormatter(new SimpleFormatter());
                 log.addHandler(filetxt);
+            }else {
+
             }
 
         } catch (IOException e) {
@@ -293,11 +295,18 @@ public class CoverageTransformer {
         }
         return log;
     }
+    
+    public void paliativoCopy() {
+         String source = "src/codcoverage/source/src/example/TriangleKind.java";
+         File pathTarget = new File("src/coverage/target/TriangleKind.java");
+         insertPackage(source, pathTarget);
+    }
 
     public static void main(String[] args) {
 
         CoverageTransformer cc = CoverageTransformer.getInstance();
         cc.analise();
+        cc.paliativoCopy();
 
 
     }
